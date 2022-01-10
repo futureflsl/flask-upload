@@ -1,0 +1,16 @@
+安装：
+pip install flask flask-uploads
+安装完毕到~/anaconda3/lib/python3.8/site-packages找到
+flask-uploads.py修改下面2个地方：
+from werkzeug import secure_filename,FileStorage
+改为：
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
+这个解决报错问题
+408行basename = self.get_filename(storage.filename)
+改为
+basename = os.path.basename(storage.filename)
+这个解决中文文件名为空问题
+运行python app.py
+访问：
+http://127.0.0.1:5200/upload局域网访问对应ip即可
